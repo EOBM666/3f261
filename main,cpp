@@ -1,0 +1,12 @@
+@startuml
+class Pacman
+class Fantasma
+class Fruta
+class Personaje
+class Vida
+Pacman --|> Personaje
+Pacman *-- Vida 
+Pacman °-- Fruta
+
+
+@enduml
