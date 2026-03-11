@@ -1,0 +1,150 @@
+@startuml
+
+class Blinky
+class Posicion{
++ mover()
+}
+class PersonajePacman{
+- vidas
++ comer()
++ morir()
+}
+ObjetoJuego <|-- PersonajePacman
+class Camino{
++ calcular()
+}
+Fantasma --> Camino
+
+class Celda{
++ estaLibre()
+}
+class CeldaLibre
+Celda <|-- CeldaLibre
+class Pared
+Celda <|-- Pared
+
+class Pacman{
++ iniciar()
++ actualizar()
++ pausar()
+}
+Pacman *-- PersonajePacman
+class BocaPacman{
++ abrir()
++ cerrar()
+}
+PersonajePacman *-- BocaPacman
+
+class Fruta{
++ aparecer()
++ desaparecer()
+}
+ObjetoJuego <|-- Fruta
+Pacman o-- Fruta
+
+class Fantasma{
++ perseguir()
++ huir()
+}
+ObjetoJuego <|-- Fantasma
+Fantasma --> Posicion
+Fantasma <|-- Blinky
+
+class GestorVidas{
++ perder()
++ quedan()
+}
+class Pinky
+Fantasma <|-- Pinky
+Pacman *-- GestorVidas
+
+class Tablero{
++ cargar()
+}
+Tablero --> Posicion
+Tablero *-- Celda
+Tablero o-- Fruta
+Pacman *-- Tablero
+
+class ObjetoJuego
+class Punto{
++ recoger()
+}
+ObjetoJuego <|-- Punto
+CeldaLibre *-- Punto
+
+class Inky
+Fantasma <|-- Inky
+class Animacion{
++ reproducir()
++ detener()
+}
+PersonajePacman *-- Animacion
+
+class GestorNivel{
++ siguiente()
++ velocidad()
+}
+GestorNivel --> Tablero
+Pacman *-- GestorNivel
+
+class Clyde
+Fantasma <|-- Clyde
+Pacman *-- Blinky
+Pacman *-- Pinky
+Pacman *-- Inky
+Pacman *-- Clyde
+
+class PuntoEspecial{
++ activarModo()
+}
+Punto <|-- PuntoEspecial
+
+class ColisionDetector{
++ verificar()
+}
+ColisionDetector --> Tablero
+Pacman --> ColisionDetector
+
+class GestorPuntuacion{
++ agregar()
++ reiniciar()
+}
+Pacman *-- GestorPuntuacion
+
+class EstadoJuego{
++ cambiar()
+}
+Pacman *-- EstadoJuego
+
+class Renderizador{
++ dibujar()
+}
+Renderizador --> Tablero
+Renderizador --> PersonajePacman
+Pacman --> Renderizador
+
+class Marcador{
++ mostrar()
+}
+Pacman *-- Marcador
+
+class ManejadorEntrada{
++ leerTecla()
+}
+Pacman --> ManejadorEntrada
+
+class Temporizador{
++ tick()
+}
+Pacman --> Temporizador
+
+class Sonido{
++ reproducir()
+}
+Pacman --> Sonido
+
+class Configuracion{
++ cargarNivel()
+}
+Pacman --> Configuracion
